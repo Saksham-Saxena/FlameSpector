@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>FlameSpector</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+
+  </script>
+  
+  <style>
+
+    .Noti{display: none;width: 210px;margin: 0 auto}
+    
+    
+    
+    body{margin: 0 auto;text-align: center;}
+    
+    
+    
+    #CON{width: 400px;margin: 0 auto;}
+    
+    
+    </style></head>
+
+    
+<body>
+    <div id="CON">
+<div class="alert">
+  Enter Your Message Here :
+</div>
+    <textarea id="message"></textarea><br/>
+        <br/>
+        <button onclick="CHECK_()" type="button" class="btn btn-secondary">Post....</button>
+<br/><br/>
+
+    <div  id="div_SPAN" class='Noti alert alert-danger'>
+        <strong>
+         Alert!! This message can start a flame war!!! Please dont post these type of agressive word :)
+        </strong>
+        <img height="22px" width="22px" src="https://i.imgur.com/9BtDwWd.png"/>
+    </div>
+  
+    <div  id="div_NO_SPAN" class='Noti alert alert-success'>
+        <strong>
+            Cool!
+        </strong>
+    </div>
+   
+    <div id="div_NULL" class='Noti alert alert-warning'>
+        <strong>
+            Your Message It's Empty
+        </strong>
+    </div>
+    
+    </div>
+
+    <script>
+   
+/***/var Is_spam         = false;
+/***/var div_SPAN        = document.getElementById("div_SPAN");
+/***/var div_NO_SPAN     = document.getElementById("div_NO_SPAN");
+/***/var div_NULL        = document.getElementById("div_NULL");
+
+        
+//function To Check The Input , I'ts Call From Button
+function CHECK_()
+{
+    
+//Always The boolean To False,For More than once Use Function
+    Is_spam=false;
+
+    var message=document.getElementById("message").value.toLowerCase();
+    var message = message.replace(/\s/g,'');
+    console.log(message);
+    if(message=="")
+    {
+        //if message are empty :
+        div_NULL.style.display="block";
+        div_SPAN.style.display="none";
+        div_NO_SPAN.style.display="none";
+    }
+    else
+    {
+        div_NULL.style.display="none";
+        
+        //Check For Fake Letter , This Loop Check From The Array
+        for(var i=0; i<Error_Charactars.length; i++) 
+        {
+            if(message.indexOf(Error_Charactars[i])>=0) 
+                {
+                  Is_spam =true;
+                }
+        }
+        
+        //If Already Spam , Alert It's Spam, If Not , Check Again part 2
+        if(Is_spam){}
+        else
+        {
+            //Check For Spam Words , This Loop Check From The Array
+            for(var i=0; i<Spam_Words.length; i++) 
+            {
+                if(message.indexOf(Spam_Words[i])>=0) 
+                    {
+                        Is_spam =true;
+                    }
+            }
+        }
+            if(Is_spam)
+                {
+                    //If It's Spam , Please Show That
+                        div_SPAN.style.display="block";
+                        div_NO_SPAN.style.display="none";
+                          console.log("Suspected Spam!");
+                }
+            else
+                {
+                    //If not , Say no :)
+                        div_SPAN.style.display="none";
+                        div_NO_SPAN.style.display="block";
+                         console.log("False!");
+                }
+    }
+    
+
+}
+//This Is Fake Charactars , Not English Charactars !!!!!
+var Error_Charactars=[];
+
+//Spam Words !!! Up To 650 Words ! , I Have So Worked To Convert it To Array  :'('
+var Spam_Words= ["ugly" , "uglypicture","dislike","garbage","stinking","worse","worstarticle","youhaveabadface","idontlikeyourface","photos","uglyface","stupidguy","youidiot","thiswebsiteiswaste" ,"websiteiswaste","coward","youarewrong","sucks","idontlikeit","stupid"];    
+</script>
+
+<!--The End Of Code :3-->
+</body>
+</html>
